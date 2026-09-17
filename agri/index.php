@@ -1,0 +1,788 @@
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>AgroCulture</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+
+        /* ==============================
+           NAVIGATION BAR
+        ============================== */
+
+        .navbar-custom {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            height: 85px;
+
+            background: rgba(25, 30, 32, 0.95);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+
+            color: white;
+
+            font-size: 38px;
+
+            font-weight: 300;
+
+            text-decoration: none;
+
+            white-space: nowrap;
+        }
+
+        .logo:hover {
+
+            color: white;
+
+            text-decoration: none;
+        }
+
+
+        /* NAVIGATION LINKS */
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 40px;
+
+            list-style: none;
+
+            margin: 0;
+        }
+
+        .nav-links li {
+
+            list-style: none;
+        }
+
+        .nav-links a {
+
+            color: white;
+
+            font-size: 17px;
+
+            text-decoration: none;
+
+            white-space: nowrap;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+
+            color: #b7d8a8;
+
+            text-decoration: none;
+        }
+
+        .nav-links i {
+
+            margin-right: 6px;
+        }
+
+
+        /* ==============================
+           HERO SECTION
+        ============================== */
+
+        .hero {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(0, 0, 0, 0.30),
+                    rgba(0, 0, 0, 0.30)
+                ),
+
+                url("images/banner.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding-top: 85px;
+        }
+
+
+        /* ==============================
+           HERO CONTENT
+        ============================== */
+
+        .hero-content {
+
+            color: white;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            text-align: center;
+        }
+
+
+        .hero-content h1 {
+
+            font-size: 58px;
+
+            font-weight: 300;
+
+            margin-bottom: 25px;
+
+            letter-spacing: 1px;
+
+            text-shadow:
+                1px 1px 5px rgba(0,0,0,0.6);
+        }
+
+
+        .hero-content p {
+
+            font-size: 25px;
+
+            font-weight: 300;
+
+            margin-bottom: 50px;
+
+            text-shadow:
+                1px 1px 4px rgba(0,0,0,0.6);
+        }
+
+
+        /* ==============================
+           LOGIN / REGISTER BUTTONS
+        ============================== */
+
+        .hero-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 35px;
+        }
+
+
+        .hero-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 150px;
+
+            height: 52px;
+
+            border: 2px solid white;
+
+            border-radius: 4px;
+
+            color: white;
+
+            background: rgba(0, 0, 0, 0.10);
+
+            font-size: 17px;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+
+        .hero-button:hover {
+
+            background: white;
+
+            color: #333;
+
+            text-decoration: none;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        #footer {
+
+            background: #202222;
+
+            color: #aaa;
+
+            padding: 55px 8% 25px;
+
+            text-align: center;
+        }
+
+
+        .footer-content {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            text-align: left;
+
+            gap: 50px;
+        }
+
+
+        .footer-section {
+
+            flex: 1;
+        }
+
+
+        .footer-section h3 {
+
+            color: white;
+
+            font-size: 22px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .footer-section p {
+
+            color: #aaa;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+
+        .footer-section i {
+
+            width: 25px;
+
+            color: #4dac71;
+        }
+
+
+        .copyright {
+
+            border-top: 1px solid rgba(255,255,255,0.15);
+
+            margin-top: 40px;
+
+            padding-top: 20px;
+
+            text-align: center;
+
+            color: #888;
+
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media screen and (max-width: 1000px) {
+
+            .navbar-custom {
+
+                padding: 0 3%;
+            }
+
+            .logo {
+
+                font-size: 30px;
+            }
+
+            .nav-links {
+
+                gap: 20px;
+            }
+
+            .nav-links a {
+
+                font-size: 14px;
+            }
+
+            .hero-content h1 {
+
+                font-size: 45px;
+            }
+
+            .hero-content p {
+
+                font-size: 21px;
+            }
+
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media screen and (max-width: 750px) {
+
+            .navbar-custom {
+
+                height: auto;
+
+                min-height: 80px;
+
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .nav-links {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+
+            .hero {
+
+                padding-top: 140px;
+
+                min-height: 700px;
+            }
+
+
+            .hero-content h1 {
+
+                font-size: 38px;
+            }
+
+
+            .hero-content p {
+
+                font-size: 18px;
+
+                margin-bottom: 35px;
+            }
+
+
+            .hero-buttons {
+
+                gap: 20px;
+            }
+
+
+            .footer-content {
+
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 30px;
+            }
+
+        }
+
+
+        /* ==============================
+           SMALL MOBILE
+        ============================== */
+
+        @media screen and (max-width: 450px) {
+
+            .logo {
+
+                font-size: 28px;
+            }
+
+
+            .nav-links a {
+
+                font-size: 12px;
+            }
+
+
+            .hero-content h1 {
+
+                font-size: 32px;
+            }
+
+
+            .hero-content p {
+
+                font-size: 17px;
+            }
+
+
+            .hero-buttons {
+
+                gap: 15px;
+            }
+
+
+            .hero-button {
+
+                width: 125px;
+
+                height: 48px;
+
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================
+     NAVIGATION BAR
+================================== -->
+
+<header class="navbar-custom">
+
+
+    <!-- LOGO -->
+
+    <a href="index.php"
+       class="logo">
+
+        AgroCulture
+
+    </a>
+
+
+    <!-- NAVIGATION -->
+
+    <ul class="nav-links">
+
+
+        <!-- HOME -->
+
+        <li>
+
+            <a href="index.php">
+
+                <i class="fa fa-home"></i>
+
+                Home
+
+            </a>
+
+        </li>
+
+
+        <!-- LOGIN / PROFILE -->
+
+        <li>
+
+            <?php
+
+            if (
+                isset($_SESSION['logged_in']) &&
+                $_SESSION['logged_in'] == 1
+            ) {
+
+            ?>
+
+                <a href="profileView.php">
+
+                    <i class="fa fa-user"></i>
+
+                    My Profile
+
+                </a>
+
+            <?php
+
+            } else {
+
+            ?>
+
+                <a href="Login/login.php">
+
+                    <i class="fa fa-sign-in"></i>
+
+                    Login
+
+                </a>
+
+            <?php
+
+            }
+
+            ?>
+
+        </li>
+
+
+        <!-- BLOG -->
+
+        <li>
+
+            <a href="blogView.php">
+
+                <i class="fa fa-comment"></i>
+
+                Blog
+
+            </a>
+
+        </li>
+
+
+        <!-- CONTACT -->
+
+        <li>
+
+            <a href="#footer">
+
+                <i class="fa fa-phone"></i>
+
+                Contact
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+</header>
+
+
+
+<!-- ==================================
+     HOME / HERO
+================================== -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <h1>
+
+            AgroCulture
+
+        </h1>
+
+
+        <p>
+
+            Your Product Our Market
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <a href="Login/login.php"
+               class="hero-button">
+
+                LOGIN
+
+            </a>
+
+
+            <a href="Login/signUp.php"
+               class="hero-button">
+
+                REGISTER
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================
+     FOOTER
+================================== -->
+
+<footer id="footer">
+
+
+    <div class="footer-content">
+
+
+        <!-- ABOUT -->
+
+        <div class="footer-section">
+
+            <h3>AgroCulture</h3>
+
+            <p>
+
+                Connecting farmers and buyers
+                through a simple and reliable
+                digital agriculture marketplace.
+
+            </p>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="footer-section">
+
+            <h3>About Us</h3>
+
+            <p>
+
+                AgroCulture helps farmers
+                showcase their agricultural
+                products and allows buyers
+                to find products easily.
+
+            </p>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-section">
+
+            <h3>Contact Us</h3>
+
+            <p>
+
+                <i class="fa fa-map-marker"></i>
+                Karnataka, India
+
+                <br>
+
+                <i class="fa fa-envelope"></i>
+                agroculture@gmail.com
+
+                <br>
+
+                <i class="fa fa-phone"></i>
+                +91 9876543210
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+
+    <div class="copyright">
+
+        © 2026 AgroCulture. All Rights Reserved.
+
+    </div>
+
+
+</footer>
+
+
+</body>
+
+</html>
